@@ -22,7 +22,7 @@ Then restart via `docker-compose`, or restart the `inventree-server` and `invent
 ## Config Options
 
 * `HOSTNAME` - Hostname or IP address of the target printer
-* `PORT` - Port number (default: `9100`; should be used in most cases)
+* `PORT` - Port number (default: `9100`; mobile printers use `6101`)
 * `TIMEOUT` - Socket timeout in seconds (default: `15`)
 * `TEMPLATE_PATH` - Absolute filesystem path to the Jinja2 template
 

@@ -1,5 +1,7 @@
 # inventree-zpl-plugin
 
+Forked from [https://github.com/yellowcrescent/inventree-zpl-plugin](https://github.com/yellowcrescent/inventree-zpl-plugin)
+
 ZPL (Zebra Printer Language) plugin for [InvenTree](https://inventree.org/). This plugin uses a [Jinja2](https://jinja.palletsprojects.com/en/3.1.x/) ZPL template to generate barcode labels for parts and stock items, then sends the generated ZPL directly to a network-attached ZPL-capable printer (such as the Zebra GK420t).
 
 ![](https://ss.ycnrg.org/jotunn_20230312_013013.png)
@@ -9,12 +11,12 @@ ZPL (Zebra Printer Language) plugin for [InvenTree](https://inventree.org/). Thi
 For a baremetal installation:
 
 ```
-pip install git+https://github.com/yellowcrescent/inventree-zpl-plugin
+pip install git+https://github.com/rezafouladian/inventree-zpl-plugin
 ```
 
 For Docker installations, edit the `plugins.txt` file and add the following:
 ```
-git+https://github.com/yellowcrescent/inventree-zpl-plugin
+git+https://github.com/rezafouladian/inventree-zpl-plugin
 ```
 
 Then restart via `docker-compose`, or restart the `inventree-server` and `inventree-worker` containers.

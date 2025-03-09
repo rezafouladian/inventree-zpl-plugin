@@ -89,12 +89,21 @@ class ZPLLabelPlugin(LabelPrintingMixin, SettingsMixin, InvenTreePlugin):
 
         fields = {
             'name': tpart.name,
-            'description': tpart.description,
+            'description': object_to_print.supplier_part.description,
             'ipn': tpart.IPN,
             'pk': tpart.pk,
+            'spk': object_to_print.pk,
             'params': tpart.parameters_map(),
             'category': tpart.category.name,
-            'category_path': tpart.category.pathstring
+            'category_path': tpart.category.pathstring,
+            'barcode': object_to_print.barcode,
+            'price': object_to_print.purchase_price,
+            'supplier': object_to_print.supplier_part.supplier,
+            'SKU': object_to_print.supplier_part.SKU,
+            'pretty_name': object_to_print.supplier_part.pretty_name,
+            'manufacturer_string': object_to_print.supplier_part.manufacturer_string,
+            'MPN': object_to_print.supplier_part.manufacturer_part.MPN,
+            'manufacturer': object_to_print.supplier_part.manufacturer_part.manufacturer.name
         }
 
         # Give template access to the full part object + preprocessed fields

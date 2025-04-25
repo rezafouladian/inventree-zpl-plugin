@@ -13,7 +13,7 @@ https://0int.io/
 import socket
 
 from jinja2 import Template
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from plugin import InvenTreePlugin
 from plugin.mixins import LabelPrintingMixin, SettingsMixin
@@ -70,15 +70,11 @@ class ZPLLabelPlugin(LabelPrintingMixin, SettingsMixin, InvenTreePlugin):
 
         templ_path = self.get_setting('TEMPLATE_PATH')
 
-        object_to_print = kwargs['label_instance'].object_to_print
+        object_to_print = kwargs['item_instance']
 
-        if kwargs['label_instance'].SUBDIR == 'part':
-            tpart = object_to_print
-        elif kwargs['label_instance'].SUBDIR == 'stockitem':
-            tpart = object_to_print.part
-        else:
-            print(f"!! Unsupported item type: {object_to_print.SUBDIR}")
-            return
+        tpart = object_to_print.part
+
+
 
         try:
             with open(templ_path) as f:
@@ -89,12 +85,21 @@ class ZPLLabelPlugin(LabelPrintingMixin, SettingsMixin, InvenTreePlugin):
 
         fields = {
             'name': tpart.name,
-            'description': tpart.description,
+            'description': object_to_print.supplier_part.description,
             'ipn': tpart.IPN,
             'pk': tpart.pk,
+            'spk': object_to_print.pk,
             'params': tpart.parameters_map(),
             'category': tpart.category.name,
-            'category_path': tpart.category.pathstring
+            'category_path': tpart.category.pathstring,
+            'barcode': object_to_print.barcode,
+            'price': object_to_print.purchase_price,
+            'supplier': object_to_print.supplier_part.supplier,
+            'SKU': object_to_print.supplier_part.SKU,
+            'pretty_name': object_to_print.supplier_part.pretty_name,
+            'manufacturer_string': object_to_print.supplier_part.manufacturer_string,
+            'MPN': object_to_print.supplier_part.manufacturer_part.MPN,
+            'manufacturer': object_to_print.supplier_part.manufacturer_part.manufacturer.name
         }
 
         # Give template access to the full part object + preprocessed fields
@@ -111,4 +116,3 @@ class ZPLLabelPlugin(LabelPrintingMixin, SettingsMixin, InvenTreePlugin):
 
         sock.close()
         print("ZPL: Spooled label to printer {zpl_host} successfully")
-

@@ -1,0 +1,37 @@
+^XA
+^CI28
+
+^FX Barcode
+^BY6,2,200
+^FO20,30^BO^FD{{ barcode }}^FS
+
+^FX Info
+^CFQ,10
+^FO150,28^FD{{ name }}^FS
+
+^FX Manufacturer
+^CFQ,10
+^FO150,55^FD{{ params.Manufacturer }}^FS
+
+^FX Main Description + Category
+^CF0,17
+^FO150,92^FB250,2,0,,^FD{{ description[0:30] }}^FS
+^CF0,25
+^FO150,125^FD{{ category }}^FS
+
+
+^FX Info Box - Package Type
+^CFA,20
+^FO20,150^GB56,26,1,B,0^FS
+^FO25,155^FD{{ params.Package }}^FS
+
+
+^FX Price
+^CFA,20
+^FO20,185^FD${{ price }}^FS
+
+^FX Part ID/Primary key
+^CF0,15
+^FO290,175^FD#{{ pk }}^FS
+
+^XZ

@@ -70,15 +70,11 @@ class ZPLLabelPlugin(LabelPrintingMixin, SettingsMixin, InvenTreePlugin):
 
         templ_path = self.get_setting('TEMPLATE_PATH')
 
-        object_to_print = kwargs['label_instance'].object_to_print
+        object_to_print = kwargs['item_instance']
 
-        if kwargs['label_instance'].SUBDIR == 'part':
-            tpart = object_to_print
-        elif kwargs['label_instance'].SUBDIR == 'stockitem':
-            tpart = object_to_print.part
-        else:
-            print(f"!! Unsupported item type: {object_to_print.SUBDIR}")
-            return
+        tpart = object_to_print.part
+
+
 
         try:
             with open(templ_path) as f:
@@ -120,4 +116,3 @@ class ZPLLabelPlugin(LabelPrintingMixin, SettingsMixin, InvenTreePlugin):
 
         sock.close()
         print("ZPL: Spooled label to printer {zpl_host} successfully")
-

@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "inventree-zpl-plugin",
-    version = "0.1.1",
+    version = "0.1.2",
     author = "Jacob Hipps",
     author_email = "jacob@ycnrg.org",
     license = "MIT",

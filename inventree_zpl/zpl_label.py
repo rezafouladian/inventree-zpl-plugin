@@ -112,7 +112,7 @@ class ZPLLabelPlugin(LabelPrintingMixin, SettingsMixin, InvenTreePlugin):
             sock.send(raw_zpl)
         except Exception as e:
             print(f"ZPL: ERROR: Failed to connect to host {zpl_host}:{zpl_port}")
-            raise(e)
+            raise e
 
         sock.close()
-        print("ZPL: Spooled label to printer {zpl_host} successfully")
+        print(f"ZPL: Spooled label to printer {zpl_host} successfully")
